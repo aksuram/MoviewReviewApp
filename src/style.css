@@ -1,5 +1,6 @@
 .Inner {
-    margin-top: 25px;
+    margin-top: 20px;
+    margin-bottom: 70px;
 }
 
 .custom-footer {
@@ -8,6 +9,10 @@
     bottom: 0;
     height: 50px;
     width: 100%;
+}
+
+.nav-register-button {
+    margin-right: 10px;
 }
 
 html {
