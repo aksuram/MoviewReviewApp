@@ -1,0 +1,24 @@
+.Inner {
+    margin-top: 25px;
+}
+
+.custom-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 50px;
+}
+
+p {
+    margin-bottom: 0px;
+}
