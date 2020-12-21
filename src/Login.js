@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import { API_URL } from "./settings";
 import { loginUser } from "./authentication";
 
 class Login extends Component {
@@ -51,6 +50,7 @@ class Login extends Component {
     }
 
     if (window.localStorage.getItem("token") || this.state.successfulLogin) {
+      this.props.refreshApp();
       form = <Redirect to="/" />;
     } else {
       form = (
