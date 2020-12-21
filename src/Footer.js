@@ -5,7 +5,13 @@ class Footer extends Component {
     return (
       <footer className="custom-footer py-3 bg-dark text-muted">
         <div className="container text-center align-middle">
-          Movie review footer
+          <p>Movie review footer</p>
+          <div>
+            <p>
+              Icons made by{" "}
+              <a href="https://www.flaticon.com/authors/freepik">Freepik</a>
+            </p>
+          </div>
         </div>
       </footer>
     );

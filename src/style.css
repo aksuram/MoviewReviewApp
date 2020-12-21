@@ -7,12 +7,23 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    height: 50px;
+    height: 80px;
     width: 100%;
+    vertical-align: middle;
+    font-family: 'Comfortaa', cursive;
+}
+
+.login-form {
+    margin-top: 50px;
+    width: 300px;
 }
 
 .nav-register-button {
     margin-right: 10px;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
 }
 
 html {
@@ -21,9 +32,89 @@ html {
 }
 
 body {
-    margin-bottom: 50px;
+    margin-bottom: 120px;
+    background-color: #DAE0E6;
 }
 
 p {
     margin-bottom: 0px;
 }
+
+.movie-rating {
+    font-size: 30px;
+}
+
+.movie-bottom-info {
+    margin-block-end: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.text-cutoff {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 290px; 
+    font-family: 'Open Sans', sans-serif;
+}
+
+.title-cutoff {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 1000px; 
+}
+
+.navbar {
+    font-family: 'Roboto', sans-serif;
+}
+
+.line-clamp {
+    margin-top: 15px;
+    display: -webkit-box;
+    max-width: 290px;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 125px;
+    margin-bottom: 5px;
+}
+
+.movie-image {
+    max-width: 100%;
+}
+
+.custom-movie-bottom-color {
+    font-family: 'Open Sans', sans-serif;
+    color: #55595c;
+}
+
+.custom-link, a:visited.custom-link, a:hover.custom-link, a:active.custom-link {
+    color: #55595c;
+    text-decoration: none
+}
+
+@media only screen and (min-width: 768px)
+{
+    .container {
+        max-width: 600px;
+    }
+
+    div.custom-container
+    {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+@media only screen and (max-width: 767px)
+{
+    .container {
+        max-width: 600px;
+    }
+
+    div.custom-container
+    {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+
