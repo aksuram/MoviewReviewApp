@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    if (this.props.needsRefreshing === true) {
+      this.props.refreshApp();
+    }
     let i;
     let items = [];
     for (i = 0; i < 25; i++) {

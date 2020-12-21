@@ -22,8 +22,20 @@ import {
 } from "react-router-dom";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      updateHome: false,
+    };
+  }
+
   refreshApp = () => {
     this.forceUpdate();
+    this.setState({ updateHome: false });
+  };
+
+  refreshHome = () => {
+    this.setState({ updateHome: true });
   };
 
   render() {
@@ -86,7 +98,11 @@ class App extends Component {
             path="/login"
             exact
             component={(props) => (
-              <Login refreshApp={this.refreshApp} {...props} />
+              <Login
+                refreshApp={this.refreshApp}
+                refreshHome={this.refreshHome}
+                {...props}
+              />
             )}
           />
           <Route
@@ -114,7 +130,11 @@ class App extends Component {
             path="/"
             exact
             component={(props) => (
-              <Home refreshApp={this.refreshApp} {...props} />
+              <Home
+                refreshApp={this.refreshApp}
+                needsRefreshing={this.state.updateHome}
+                {...props}
+              />
             )}
           />
           <Route path="*">
@@ -178,7 +198,11 @@ class App extends Component {
             path="/login"
             exact
             component={(props) => (
-              <Login refreshApp={this.refreshApp} {...props} />
+              <Login
+                refreshApp={this.refreshApp}
+                refreshHome={this.refreshHome}
+                {...props}
+              />
             )}
           />
           <Route
@@ -206,7 +230,11 @@ class App extends Component {
             path="/"
             exact
             component={(props) => (
-              <Home refreshApp={this.refreshApp} {...props} />
+              <Home
+                refreshApp={this.refreshApp}
+                needsRefreshing={this.state.updateHome}
+                {...props}
+              />
             )}
           />
           <Route path="*">
@@ -270,7 +298,11 @@ class App extends Component {
             path="/login"
             exact
             component={(props) => (
-              <Login refreshApp={this.refreshApp} {...props} />
+              <Login
+                refreshApp={this.refreshApp}
+                refreshHome={this.refreshHome}
+                {...props}
+              />
             )}
           />
           <Route
@@ -298,7 +330,11 @@ class App extends Component {
             path="/"
             exact
             component={(props) => (
-              <Home refreshApp={this.refreshApp} {...props} />
+              <Home
+                refreshApp={this.refreshApp}
+                needsRefreshing={this.state.updateHome}
+                {...props}
+              />
             )}
           />
           <Route path="*">

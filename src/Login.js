@@ -50,7 +50,7 @@ class Login extends Component {
     }
 
     if (window.localStorage.getItem("token") || this.state.successfulLogin) {
-      this.props.refreshApp();
+      this.props.refreshHome();
       form = <Redirect to="/" />;
     } else {
       form = (
