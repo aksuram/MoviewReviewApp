@@ -185,7 +185,7 @@ class Header extends Component {
             Register
           </Nav.Link>
           <Button
-            variant="outline-primary"
+            variant="primary"
             as={Link}
             to="/login"
             onClick={() => this.setActiveNavLink("/login")}
