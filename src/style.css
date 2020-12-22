@@ -53,7 +53,7 @@ p {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    max-width: 290px; 
+    max-width: 300px; 
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -64,14 +64,24 @@ p {
     max-width: 1000px; 
 }
 
+.remove-padding-left {
+    padding-left: 0px;
+    padding-right: 5px;
+}
+
+.remove-padding-right {
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
 .navbar {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Signika Negative', sans-serif;
 }
 
 .line-clamp {
     margin-top: 15px;
     display: -webkit-box;
-    max-width: 290px;
+    max-width: 300px;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
