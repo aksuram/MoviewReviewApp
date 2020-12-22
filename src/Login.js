@@ -2,6 +2,15 @@ import React, { Component } from "react";
 import { Form, Button, Alert, Card } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { loginUser } from "./authentication";
+import {
+  API_URL,
+  NUMBER_PATTERN,
+  WORD_PATTERN,
+  USERNAME_PATTERN,
+  EMAIL_PATTERN,
+  DOUBLE_PATTERN,
+  DATE_PATTERN,
+} from "./settings";
 
 class Login extends Component {
   constructor(props) {
@@ -64,10 +73,12 @@ class Login extends Component {
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   name="username"
-                  type="username"
+                  type="text"
                   placeholder="Enter your username"
                   maxLength="50"
                   required="required"
+                  pattern={USERNAME_PATTERN}
+                  title="Enter a viable username from 5 to 50 characters using alfanumerics"
                   value={this.state.username}
                   onChange={this.handleChange}
                 />
@@ -80,6 +91,7 @@ class Login extends Component {
                   maxLength="60"
                   required="required"
                   placeholder="Enter your password"
+                  title="Password needs to be at least 8 characters long"
                   value={this.state.password}
                   onChange={this.handleChange}
                 />

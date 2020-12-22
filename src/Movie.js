@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Row, Col, Image, Button, Modal } from "react-bootstrap";
+import { Card, Row, Col, Image, Button, Modal, Alert } from "react-bootstrap";
 import { API_URL } from "./settings";
 import { ReactComponent as StarIcon } from "./icons/star-with-five-points.svg";
 import { getUserRole } from "./authentication";
@@ -173,8 +173,15 @@ class Movie extends Component {
     let message = null;
     if (response.status === 200) {
       message = "Successfully deleted a movie";
+      //window.location.href = "/movies";
 
-      this.setState({ message: message, error: false });
+      this.setState({
+        message: message,
+        error: false,
+        showModal: false,
+        movie: null,
+        button: null,
+      });
     } else {
       if (response.status === 401) {
         message = "Unauthorized to delete movies";
@@ -190,7 +197,7 @@ class Movie extends Component {
         message = "Error: Unknown exception occured";
       }
 
-      this.setState({ message: message, error: true });
+      this.setState({ message: message, error: true, showModal: false });
       //TODO: redirect to movie list
     }
   };
@@ -219,10 +226,17 @@ class Movie extends Component {
         </Modal.Body>
       </Modal>
     );
+    let alert = null;
+    if (this.state.error) {
+      alert = <Alert variant="danger">Couldn't delete the movie</Alert>;
+    } else if (this.state.movie === null && !this.state.error) {
+      alert = <Alert variant="success">Successfully deleted the movie</Alert>;
+    }
 
     return (
       <div className="container">
         <h1 className="text-center mt-4 title-cutoff">{this.state.title}</h1>
+        {alert}
         {modal}
         {this.state.movie}
         {this.state.button}

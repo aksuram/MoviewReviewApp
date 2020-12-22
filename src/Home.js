@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Image } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 class Home extends Component {
   render() {
@@ -10,7 +9,7 @@ class Home extends Component {
     }
 
     return (
-      <div className="container text-center">
+      <div className="container text-center home-container">
         <h1 className="text-center mt-4">Movie review website</h1>
         <Image
           src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1040&q=80"

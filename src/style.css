@@ -89,6 +89,10 @@ p {
     margin-bottom: 5px;
 }
 
+.custom-navbar {
+    background-color: #b39ddb;
+}
+
 .movie-image {
     max-width: 100%;
 }
@@ -107,6 +111,10 @@ p {
 {
     .container {
         max-width: 600px;
+    }
+
+    .home-container {
+        max-width: 800px;
     }
 
     div.custom-container

@@ -19,7 +19,7 @@ import {
   DOUBLE_PATTERN,
   DATE_PATTERN,
 } from "./settings";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { ReactComponent as StarIcon } from "./icons/star-with-five-points.svg";
 import { getUserRole } from "./authentication";
 
@@ -41,6 +41,7 @@ class Movies extends Component {
       categories: [],
       message: null,
       error: false,
+      movieId: null,
     };
   }
 
@@ -172,7 +173,7 @@ class Movies extends Component {
     let categories = [];
     let j;
     categories.push(
-      <option hidden disabled selected value>
+      <option hidden disabled selected value="">
         -- select an option --
       </option>
     );
@@ -212,12 +213,20 @@ class Movies extends Component {
     const formData = {
       title: this.state.title,
       description: this.state.description,
-      rating: parseFloat(this.state.rating, 10),
+      rating: isNaN(parseFloat(this.state.rating, 10))
+        ? null
+        : parseFloat(this.state.rating, 10),
       ageRating: this.state.ageRating,
       releaseDate: this.state.releaseDate,
-      categoryId: parseInt(this.state.categoryId, 10),
-      length: parseInt(this.state.length, 10),
+      categoryId: isNaN(parseInt(this.state.categoryId, 10))
+        ? null
+        : parseInt(this.state.categoryId, 10),
+      length: isNaN(parseInt(this.state.length, 10))
+        ? null
+        : parseInt(this.state.length, 10),
     };
+
+    console.log(formData);
 
     const response = await fetch(`${API_URL}/movies`, {
       method: "POST",
@@ -230,9 +239,14 @@ class Movies extends Component {
 
     let message = null;
     if (response.status === 201) {
+      let responseBody = await response.json();
       message = "Successfully created a movie";
 
-      this.setState({ message: message, error: false });
+      this.setState({
+        message: message,
+        error: false,
+        movieId: responseBody.id,
+      });
     } else {
       if (response.status === 401) {
         message = "Unauthorized to create movies";
@@ -252,6 +266,10 @@ class Movies extends Component {
   };
 
   render() {
+    if (this.state.message !== null && !this.state.error) {
+      console.log(this.state.movieId);
+      return <Redirect to={`/movie/${this.state.movieId}`} />;
+    }
     document.title = "Movies";
     //Modal for adding
     let modal = (
@@ -265,6 +283,7 @@ class Movies extends Component {
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
+                required
                 name="title"
                 value={this.state.title}
                 maxLength="200"
@@ -276,6 +295,7 @@ class Movies extends Component {
             <Form.Group controlId="description">
               <Form.Label>Description</Form.Label>
               <Form.Control
+                required
                 as="textarea"
                 type="text"
                 name="description"
@@ -290,6 +310,7 @@ class Movies extends Component {
             <Form.Group controlId="categoryId">
               <Form.Label>Category</Form.Label>
               <Form.Control
+                required
                 as="select"
                 name="categoryId"
                 value={this.state.categoryId}
@@ -360,18 +381,12 @@ class Movies extends Component {
                 </Col>
               </Row>
             </Container>
+            <Button form="movieAddForm" variant="primary" type="submit">
+              Add Movie
+            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            form="movieAddForm"
-            variant="primary"
-            type="submit"
-            onClick={this.addMovie}
-          >
-            Add Movie
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     );
 

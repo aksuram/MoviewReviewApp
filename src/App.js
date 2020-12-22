@@ -88,7 +88,7 @@ class App extends Component {
             )}
           />
           <Route
-            path="/user"
+            path="/user/:id(\d+)"
             exact
             component={(props) => (
               <User refreshApp={this.refreshApp} {...props} />
@@ -188,7 +188,7 @@ class App extends Component {
             )}
           />
           <Route
-            path="/user"
+            path="/user/:id(\d+)"
             exact
             component={(props) => (
               <User refreshApp={this.refreshApp} {...props} />
@@ -288,7 +288,7 @@ class App extends Component {
             )}
           />
           <Route
-            path="/user"
+            path="/user/:id(\d+)"
             exact
             component={(props) => (
               <User refreshApp={this.refreshApp} {...props} />

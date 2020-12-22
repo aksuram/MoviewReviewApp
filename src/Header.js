@@ -200,10 +200,10 @@ class Header extends Component {
       <header>
         <Navbar
           collapseOnSelect
-          bg="dark"
           variant="dark"
           sticky="top"
           expand="md"
+          style={{ backgroundColor: "#8066af" }}
         >
           <Navbar.Brand
             as={Link}
