@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Row, Col, Image, Button } from "react-bootstrap";
+import { Card, Row, Col, Image, Button, Modal } from "react-bootstrap";
 import { API_URL } from "./settings";
 import { ReactComponent as StarIcon } from "./icons/star-with-five-points.svg";
 import { getUserRole } from "./authentication";
@@ -7,7 +7,7 @@ import { getUserRole } from "./authentication";
 class Movie extends Component {
   constructor(props) {
     super(props);
-    this.state = { movie: null, title: null, button: null };
+    this.state = { movie: null, title: null, button: null, showModal: false };
   }
 
   getCategoryName(response, id) {
@@ -39,7 +39,6 @@ class Movie extends Component {
     } else {
       console.log("ERROR categories list");
     }
-    console.log(`${API_URL}/movie/${this.props.match.params.id}`);
 
     //Movie
     let movie = null;
@@ -56,7 +55,6 @@ class Movie extends Component {
     if (response.status === 200) {
       let responseBody = await response.json();
       this.setState({ title: responseBody.title });
-      console.log(responseBody);
 
       movie = (
         <Card className="mt-4 shadow-sm">
@@ -142,7 +140,11 @@ class Movie extends Component {
 
       if (getUserRole() === "a") {
         let button = (
-          <Button className="mt-3 ml-2" variant="danger">
+          <Button
+            className="mt-3 ml-2"
+            variant="danger"
+            onClick={this.handleClick}
+          >
             Delete Movie
           </Button>
         );
@@ -154,10 +156,74 @@ class Movie extends Component {
     }
   }
 
+  deleteMovie = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch(
+      `${API_URL}/movies/${this.props.match.params.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + window.localStorage.getItem("token"),
+        },
+      }
+    );
+
+    let message = null;
+    if (response.status === 200) {
+      message = "Successfully deleted a movie";
+
+      this.setState({ message: message, error: false });
+    } else {
+      if (response.status === 401) {
+        message = "Unauthorized to delete movies";
+      } else if (response.status === 403) {
+        message = "Forbidden to delete movies";
+      } else if (response.status === 404) {
+        message = "Impossible to delete movie because it doesn't exist";
+      } else if (response.status === 409) {
+        message = "Impossible to delete movie because of a conflict";
+      } else if (response.status === 500) {
+        message = "Error: Unknown exception occured";
+      } else {
+        message = "Error: Unknown exception occured";
+      }
+
+      this.setState({ message: message, error: true });
+      //TODO: redirect to movie list
+    }
+  };
+
+  handleClick = () => {
+    this.setState({ showModal: !this.state.showModal });
+  };
+
   render() {
+    document.title = this.state.title;
+
+    let modal = (
+      <Modal
+        show={this.state.showModal}
+        onHide={this.handleClick}
+        centered
+        size="sm"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Do you really want to delete it?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Button variant="danger" type="submit" onClick={this.deleteMovie}>
+            Delete Movie
+          </Button>
+        </Modal.Body>
+      </Modal>
+    );
+
     return (
       <div className="container">
         <h1 className="text-center mt-4 title-cutoff">{this.state.title}</h1>
+        {modal}
         {this.state.movie}
         {this.state.button}
       </div>

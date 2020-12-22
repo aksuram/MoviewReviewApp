@@ -5,7 +5,7 @@ class Footer extends Component {
     return (
       <footer className="custom-footer py-3 bg-dark text-muted">
         <div className="container text-center align-middle">
-          <p>Movie review footer</p>
+          <p>Movie review website - Tadas Maruška 2020</p>
           <div>
             <p>
               Icons made by{" "}

@@ -192,7 +192,6 @@ class Movies extends Component {
 
   //Handles the clicking of Add button and also the closing of the Add modal
   handleClick = () => {
-    console.log(!this.state.showModal);
     this.setState({ showModal: !this.state.showModal });
   };
 
@@ -201,7 +200,6 @@ class Movies extends Component {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    console.log(name + " " + value);
 
     this.setState({
       [name]: value,
@@ -210,7 +208,6 @@ class Movies extends Component {
 
   addMovie = async (event) => {
     event.preventDefault();
-    console.log(this.state.categoryId);
 
     const formData = {
       title: this.state.title,
@@ -251,9 +248,11 @@ class Movies extends Component {
 
       this.setState({ message: message, error: true });
     }
+    //TODO: refresh page after adding movie
   };
 
   render() {
+    document.title = "Movies";
     //Modal for adding
     let modal = (
       <Modal show={this.state.showModal} onHide={this.handleClick} centered>
@@ -261,7 +260,7 @@ class Movies extends Component {
           <Modal.Title>Add Movie</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={this.addMovie}>
+          <Form id="movieAddForm" onSubmit={this.addMovie}>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control
@@ -364,7 +363,12 @@ class Movies extends Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={this.addMovie}>
+          <Button
+            form="movieAddForm"
+            variant="primary"
+            type="submit"
+            onClick={this.addMovie}
+          >
             Add Movie
           </Button>
         </Modal.Footer>

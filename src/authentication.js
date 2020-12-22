@@ -46,12 +46,6 @@ async function getTokenFromApi(username, password, handleState) {
       jwt_decode(responseBody.token).exp
     );
 
-    console.log(window.localStorage.getItem("token"));
-    console.log(window.localStorage.getItem("id"));
-    console.log(window.localStorage.getItem("username"));
-    console.log(window.localStorage.getItem("role"));
-    console.log(window.localStorage.getItem("expirationTime"));
-
     return response.status;
   } else {
     if (response.status === 401) {
